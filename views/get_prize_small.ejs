@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>「智能刮刮卡」抽獎</title>
+
+	<style type="text/css">
+		#download-qr-btn {
+	        z-index: 1;
+		    position: absolute;
+		    left: 170px;
+		    /* top: 2209px; */
+		    /* bottom: 412px; */
+		    top: 1500px;
+		    width: 640px;
+		    height: 140px;
+		    /* background-color: yellow; */
+		}
+		#get-prize-small-background {
+			width: 100%;
+			position: absolute;
+		}
+		#get-prize-small-background img {
+			width: 100%;
+			position: absolute;
+		}
+		body, html {
+		  height: 100%;
+		  margin: 0;
+		}
+/*		#get-prize-small-background #qr-img {
+		    width: 600px;
+		    left: 190px;
+		    top: 870px;
+		    z-index: 1;
+		}*/
+		#get-prize-small-background #qrcode img {
+		    /* width: 100%; */
+		    /* position: absolute; */
+		    width: 530px;
+		    /* height: 900px; */
+		    left: 225px;
+		    top: 837px;
+		    z-index: 1;
+		}
+		#powered-by-ivm-get-prize-small {
+		    position: absolute;
+		    left: 800px;
+		    top: 1700px;
+		    z-index: 1;
+		}
+	</style>
+</head>
+<body>
+	<div id="get-prize-small-background">
+
+		<a href="/images/snack.png" id="download-qr-btn" download="">
+			<!-- <div></div> -->
+		</a>
+		<!-- <img id="qr-img" src="/images/snack.png"> -->
+		<div id="qrcode"></div>
+		<div id="powered-by-ivm-get-prize-small">Powered by IVM</div>
+		<img style="width: 100%" src="/images/get_prize_2.jpg">
+	</div>
+</body>
+
+<script type="text/javascript" src="/javascript/qrcode.min.js"></script>
+<script type="text/javascript">
+	var redeem_qr = <%- JSON.stringify(redeem_qr) %>;
+	// var redeem_qr = <%= redeem_qr %>;
+	// console.log(redeem_qr)
+
+	// var redeem_qr = 'redeem_qr';
+	new QRCode(document.getElementById("qrcode"), redeem_qr);
+</script>
+</html>

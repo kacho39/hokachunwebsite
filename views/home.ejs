@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>「智能刮刮卡」抽獎</title>
+
+	<%- include('partials/head'); %>
+
+	<style type="text/css">
+		#not-agree-btn {
+		    z-index: 1;
+		    position: absolute;
+		    left: 70px;
+		    /*top: 2209px;*/
+		    bottom: 75px;
+		    width: 380px;
+		    height: 140px;
+		    /*background-color: yellow;*/
+		}
+		#agree-btn {
+		    z-index: 1;
+		    position: absolute;
+	        left: 534px;
+		    /*top: 2209px;*/
+		    bottom: 75px;
+		    width: 380px;
+		    height: 140px;
+		    /*background-color: yellow;*/
+		}
+		#rules-btn {
+			z-index: 1;
+		    position: absolute;
+		    left: 445px;
+		    /* top: 2209px; */
+		    bottom: 16px;
+		    width: 234px;
+		    height: 40px;
+		    /* background-color: yellow; */
+		}
+		#home-background {
+			width: 100%;
+			position: absolute;
+		}
+		#home-background img {
+			width: 100%;
+			position: absolute;
+		}
+		body, html {
+		  height: 100%;
+		  margin: 0;
+		}
+		.home-background {
+			width: 100%;
+			position: absolute;
+		}
+		#powered-by-ivm-home {
+		    position: absolute;
+		    left: 800px;
+		    top: 2192px;
+		}
+	</style>
+</head>
+<body>
+	<div class="home-background">
+
+		<% if(locals.error_message) { %>
+			<div class="alert">
+			  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+			  <%= error_message %>
+			</div>
+		<% } %>
+
+		<a href="https://www.facebook.com/TapTabBox/" id="not-agree-btn">
+			<div></div>
+		</a>
+		<% if(locals.prize_token) { %>
+			<a href="/scratch-card/?prize_token=<%= prize_token %>" id="agree-btn">
+				<div></div>
+			</a>
+		<% } %>
+		<a id="rules-btn" href="/rules"></a>
+		<div id="powered-by-ivm-home">Powered by IVM</div>
+		<img style="width: 100%" src="/images/home.jpg">
+
+	</div>
+</body>
+</html>

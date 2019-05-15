@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>「智能刮刮卡」抽獎</title>
+
+	<style type="text/css">
+		/*txt*/
+		@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+
+		@import url(//fonts.googleapis.com/earlyaccess/notosanssc.css);
+		@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+		@font-face {
+		  font-family: 'MyWebFont';
+		  src: url('NotoSans-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+		       url('NotoSans-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+		}
+		.bold {
+		    font-weight: bold;
+		}
+		.medium {
+		    font-weight: 500;
+		}
+		.noto-sans-sc {
+		    font-family: 'Noto Sans SC', sans-serif;
+		}
+		.noto-sans-tc {
+		    font-family: 'Noto Sans TC', sans-serif;
+		}
+		#winner-info-background {
+			width: 100%;
+			position: absolute;
+		}
+		#winner-info-background img {
+			width: 100%;
+			position: absolute;
+		}
+		body, html {
+		  height: 100%;
+		  margin: 0;
+		}
+		#winner-info-background #prize-img {
+		    /* width: 100%; */
+		    /* position: absolute; */
+		    width: 600px;
+		    /* height: 900px; */
+		    left: 190px;
+		    top: 90px;
+		    z-index: 1;
+		}
+		#winner-info-div-left {
+			position: absolute;
+		    z-index: 1;
+		    left: 200px;
+		    top: 745px;
+		    font-size: 30px;
+		}
+		#winner-info-div-right {
+			position: absolute;
+		    z-index: 1;
+		    left: 470px;
+		    top: 745px;
+		    font-size: 30px;
+		}
+		.float-right {
+			float: right;
+		}
+		#powered-by-ivm-winner-info {
+		    position: absolute;
+		    left: 800px;
+		    top: 1700px;
+		    z-index: 1;
+		}
+		#email-width-450 {
+			width: 450px;
+			word-wrap: break-word;
+		}
+
+
+    /* width: 100%; */
+    /* position: absolute; */
+    /*width: 750px;
+    height: 900px;
+    left: 117px;
+    top: 420px;
+    z-index: 1;*/
+	</style>
+</head>
+<body>
+	<div id="winner-info-background">
+		<img id="prize-img" src="/images/prize_<%= winner_info.prize_id %>.png">
+		<div id="winner-info-div-left" class="noto-sans-tc">
+			<div>
+				<label class="float-right">得獎編號: </label>
+			</div>
+			<div>
+				<label class="float-right">中文姓名: </label>
+			</div>
+			<div>
+				<label class="float-right">英文姓名: </label>
+			</div>
+			<div>
+				<label class="float-right">身分證件號碼: </label>
+			</div>
+			<div>
+				<label class="float-right">聯絡電話號碼: </label>
+			</div>
+			<div>
+				<label class="float-right">電郵地址: </label>
+			</div>
+		</div>
+		<div id="winner-info-div-right" class="noto-sans-tc">
+			<div>
+				<label><%= winner_info.id %></label>
+			</div>
+			<div>
+				<label><%= winner_info.name_chi %></label>
+			</div>
+			<div>
+				<label><%= winner_info.name_eng %></label>
+			</div>
+			<div>
+				<label><%= winner_info.hk_id %></label>
+			</div>
+			<div>
+				<label><%= winner_info.phone_no %></label>
+			</div>
+			<div id="email-width-450">
+				<label><%= winner_info.email %></label>
+			</div>
+			
+		</div>
+
+		<div id="powered-by-ivm-winner-info">Powered by IVM</div>
+
+		<img style="width: 100%" src="/images/winner_info.jpg">
+	</div>
+</body>
+</html>

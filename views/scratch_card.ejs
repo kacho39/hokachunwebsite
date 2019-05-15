@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>「智能刮刮卡」抽獎</title>
+
+	<style type="text/css">
+
+	body {
+		/*padding: 20px 0;*/
+		margin: 0px;
+		padding: 0px;
+	}
+	#scratch-background {
+		width: 100%;
+		position: absolute;
+	}
+	#scratch-background img {
+		/*width: 100%;*/
+		position: absolute;
+	}
+	#scratch-background #scratch-prize-img {
+		/*width: 100%;*/
+		/*position: absolute;*/
+		width: 750px;
+		height: 900px;
+		left: 117px;
+	    top: 420px;
+	    z-index: 1;
+	}
+	#scratch-background #scratch-background-img {
+		width: 100%;
+		/*position: absolute;*/
+	}
+
+	#get-prize-btn {
+		display: none;
+		background-image: url('/images/get_prize_btn.png');
+	    background-size: contain;
+	    background-repeat: no-repeat;
+	    width: 450px;
+	    height: 182px;  
+		position: absolute;
+	    bottom: 100px;
+	    left: 50%;
+	    -webkit-transform: translateX(-50%);
+	    transform: translateX(-50%);
+	    z-index: 100;
+	}
+	#powered-by-ivm-scratch-card {
+	    position: absolute;
+	    left: 800px;
+	    top: 1700px;
+	    z-index: 1;
+	}
+
+	html{background:#F5F5F5;color:#333;-webkit-text-size-adjust:none;-webkit-touch-callout:none;height: 100%;}
+	body,h1,h2,h3,h4,h5,h6,p{margin:0;}body{height: 100%;font:13px/1.5 arial;font-family:"lucida grande",tahoma}
+	img{border:0;vertical-align:middle;}
+	/*body{padding:20px 0;}*/
+	.hide{display: none;}
+	#title{font-size:18px;text-align:center;}
+	.box, .content{width:750px;height:900px;}
+	.box img{max-width:750px;max-height: 900px;}
+	.box{
+		position:relative;
+		overflow:hidden;
+		/*margin:0 auto;*/
+		left: 117px;
+		top: 420px;
+	    border-radius: 30px;
+	    z-index: 2;
+
+	}
+
+	@media (min-width: 1000px) {
+		.box {
+			width: 805px;
+	    	height: 990px;
+		}
+	}
+	.content{position: relative;overflow:hidden;text-align:center;background:#FFF;width: 100%;height: 100%;}
+	.mask{position:absolute;top:0;left:0;width:750px;height:900px;cursor: pointer;width: 100%;height: 100%;    border-radius: 30px;}
+	canvas {
+		width: 100%;
+		    border-radius: 30px;
+		    height: 100%;
+	}
+	</style>
+</head>
+<body>
+	<!--
+https://github.com/andreruffert/scratchie.js
+-->
+
+<div id="scratch-background">
+	<% if(prize_id) { %>
+		<% if(prize_id == 1){ %>
+			<img id="scratch-prize-img" src="/images/prize_1.png">
+		<% } else if (prize_id == 2) { %>
+			<img id="scratch-prize-img" src="/images/prize_2.png">
+		<% } else if (prize_id == 3) { %>
+			<img id="scratch-prize-img" src="/images/prize_3.png">
+		<% } else if (prize_id == 4) { %>
+			<img id="scratch-prize-img" src="/images/prize_4.png">
+		<% } else if (prize_id == 5) { %>
+			<img id="scratch-prize-img" src="/images/prize_5.png">	<!-- later change back to prize 5 -->
+		<% } else if (prize_id == 6) { %>
+			<img id="scratch-prize-img" src="/images/prize_6.png">
+		<% } else if (prize_id == 7) { %>
+			<img id="scratch-prize-img" src="/images/prize_7.png">
+		<% } else if (prize_id == 8) { %>
+			<img id="scratch-prize-img" src="/images/prize_8.png">
+		<% } else if (prize_id == 9) { %>
+			<img id="scratch-prize-img" src="/images/prize_9.png">
+		<% } %>
+	<% } %>
+
+
+	<!-- <div id="powered-by-ivm-scratch-card">Powered by IVM</div> -->
+
+	<% if(qr_color == 'g'){ %>
+		<img id="scratch-background-img" src="/images/scratch_background_<%= qr_color %>.jpg">
+	<% } else if (qr_color == 's') { %>
+		<img id="scratch-background-img" src="/images/scratch_background_<%= qr_color %>.jpg">
+	<% } else if (qr_color == 'n') { %>
+		<img id="scratch-background-img" src="/images/scratch_background_<%= qr_color %>.jpg">
+	<% } %>
+</div>
+<!-- <h3 id="title">刮刮卡</h3> -->
+<div class="box">
+	<div class="mask"><canvas id="j-cvs"></canvas></div>
+</div>
+
+<!-- <a href="/get-prize">
+	<div id="get-prize-btn">
+	</div>
+</a> -->
+
+<form action="/get-prize" method="POST">
+
+	<input type="hidden" name="token" value="<%= prize_token %>" />
+	<!-- <input type="hidden" name="param2" value="val2" /> -->
+
+	<a href="#" onclick="this.parentNode.submit()">
+		<div id="get-prize-btn">
+		</div>
+	</a>
+	<!-- <button onclick="goBack()">Go Back</button> -->
+
+</form>
+
+<div id="debug"></div>
+
+
+<script>
+// function goBack() {
+//     window.history.back();
+// }
+</script>
+
+<!-- <script type="text/javascript" src="/javascript/scratch_card.js"></script> -->
+<script type="text/javascript">
+	/*
+author: kairyou
+*/
+
+var doc = document,
+cvs = doc.getElementById('j-cvs'), ctx,
+config = {
+	w: 750, h: 900
+},
+mouseDown = false;
+
+var debug = function(msg){
+	var obj = doc.getElementById('debug');
+	obj.innerHTML += msg + '<br>';
+}
+
+function getLocalCoords(elem, ev) {
+	var ox = 0, oy = 0;
+	var first;
+	var pageX, pageY;
+    // currentTarget element.
+    while (elem != null) {
+    	ox += elem.offsetLeft;
+    	oy += elem.offsetTop;
+    	elem = elem.offsetParent;
+    }
+    // fix,<=IE8
+    if ("changedTouches" in ev) {
+    	first = ev.changedTouches[0];
+    	pageX = first.pageX;
+    	pageY = first.pageY;
+    } else {
+    	pageX = ev.pageX;
+    	pageY = ev.pageY;
+    }
+    return { 'x': pageX - ox, 'y': pageY - oy };
+}
+function diffTransSize(cxt, threshold, callback){
+    if (!'getImageData' in ctx) return; // <=IE8 不支持
+    threshold = threshold || 0.5;
+    if (threshold >1 || threshold < 0) threshold = 1;
+    var imageData = ctx.getImageData(0, 0, cvs.width, cvs.height),
+    pix = imageData.data,
+    pixLength = pix.length,
+    pixelSize = pixLength*0.25;
+    var i = 1, k, l=0;
+    for (; i <= pixelSize; i++) { // 3, 7, 11 -> 4n-1
+    	if (0 === pix[4*i-1]) l++;
+    };
+    if (l>pixelSize * threshold) {
+    	// console.log('bav')
+    	callback.apply(ctx, [l]);
+    };
+}
+function scratchLine(cvs, x, y, fresh) {
+	ctx = cvs.getContext('2d');
+    // sumsung Android 4.1.2, 4.2.2 default browser does not render, https://goo.gl/H5lwgo
+    ctx.globalCompositeOperation = 'destination-out'; 
+
+    ctx.lineWidth = 85;
+    ctx.lineCap = ctx.lineJoin = 'round';
+    ctx.strokeStyle = 'rgba(0,0,0,1)'; //'#000';
+    if (fresh) {
+    	ctx.beginPath();
+        // bug WebKit/Opera/IE9: +0.01
+        ctx.moveTo(x+0.1, y);
+    }
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    // fix sumsung bug
+    var style = cvs.style; // cursor/lineHeight
+    style.lineHeight = style.lineHeight == '1' ? '1.1' : '1';
+
+    diffTransSize(ctx, 0.5, function() {
+    	// var prize_id = 
+		var prize_id = <%- JSON.stringify(prize_id) %>;
+    	// document.getElementById('title').innerHTML ='50% complete';
+    	// $('.get-prize-btn').show()
+    	if (prize_id > 1) {
+    		document.getElementById('get-prize-btn').style.display = 'block';
+    	}
+    });
+}
+function setupCanvases() {
+	cvs.width = config.w;
+	cvs.height = config.h;
+	var ctx = cvs.getContext("2d");
+    // add mask
+    ctx.fillStyle = '#CCC';
+    ctx.fillRect(0, 0, cvs.width, cvs.height);
+    // On mouse down
+    var mousedown_handler = function(e) {
+    	var local = getLocalCoords(cvs, e);
+    	mouseDown = true;
+    	scratchLine(cvs, local.x, local.y, true);
+        // debug('touchstart')
+        if (e.cancelable) { e.preventDefault(); }
+        return false;
+    };
+    // On mouse move
+    var mousemove_handler = function(e) {
+        // debug('touchmove')
+        if (!mouseDown) { return true; }
+        var local = getLocalCoords(cvs, e);
+        // debug(local.x + ',' + local.y);
+        scratchLine(cvs, local.x, local.y, false);
+
+        if (e.cancelable) { e.preventDefault(); }
+        return false;
+    };
+    // On mouseup
+    var mouseup_handler = function(e) {
+        // debug('touchend')
+        if (mouseDown) {
+        	mouseDown = false;
+        	if (e.cancelable) { e.preventDefault(); }
+        	return false;
+        }
+        return true;
+    };
+    on(cvs, 'mousedown', mousedown_handler);
+    on(cvs, 'touchstart', mousedown_handler);
+    on(window, 'mousemove', mousemove_handler);
+    on(window, 'touchmove', mousemove_handler);
+    on(window, 'mouseup', mouseup_handler);
+    on(window, 'touchend', mouseup_handler);
+}
+function on(E, N, FN){
+	E.addEventListener ? E.addEventListener(N, FN, !1) : E.attachEvent('on' + N, FN);
+}
+setupCanvases();
+
+</script>
+
+</body>
+</html>

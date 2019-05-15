@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>「智能刮刮卡」抽獎</title>
+
+	<style type="text/css">
+		/*input:focus{
+		    outline: none;
+		}*/
+		#cancel-btn {
+		    z-index: 1;
+		    position: absolute;
+		    left: 70px;
+		    /*top: 2209px;*/
+		    /*bottom: 412px;*/
+		    top: 1190px;
+		    width: 380px;
+		    height: 140px;
+		    /*background-color: yellow;*/
+		}
+		#send-data-btn {
+		    z-index: 1;
+		    position: absolute;
+	        left: 534px;
+		    /*top: 2209px;*/
+		    /*bottom: 412px;*/
+		    top: 1190px;
+		    width: 380px;
+		    height: 140px;
+		    /*background-color: yellow;*/
+		}
+		#get-prize-big-background {
+			width: 100%;
+			position: absolute;
+		}
+		#get-prize-big-background img {
+			width: 100%;
+			position: absolute;
+		}
+		body, html {
+		  height: 100%;
+		  margin: 0;
+		}
+
+		input:focus {
+			outline-offset: unset
+		}
+		.get-prize-big-background #input-1 {
+	        position: absolute;
+		    width: 260px;
+		    border: 0px;
+		    background-color: unset;
+		    outline: inherit;
+		    font-size: 30px;
+		    width: 473px;
+		    height: 43px;
+		    left: 350px;
+		    top: 471px;
+		}
+		.get-prize-big-background #input-2 {
+	        position: absolute;
+		    width: 260px;
+		    border: 0px;
+		    background-color: unset;
+		    outline: inherit;
+		    font-size: 30px;
+		    width: 473px;
+		    height: 43px;
+		    left: 350px;
+		    top: 555px;
+		}
+		.get-prize-big-background #input-3 {
+	        position: absolute;
+		    width: 260px;
+		    border: 0px;
+		    background-color: unset;
+		    outline: inherit;
+		    font-size: 30px;
+		    width: 403px;
+		    height: 43px;
+		    left: 420px;
+		    top: 650px;
+		}
+		.get-prize-big-background #input-4 {
+	        position: absolute;
+		    width: 260px;
+		    border: 0px;
+		    background-color: unset;
+		    outline: inherit;
+		    font-size: 30px;
+		    width: 406px;
+		    height: 43px;
+		    left: 418px;
+		    top: 817px;
+		}
+		.get-prize-big-background #input-5 {
+	        position: absolute;
+		    width: 260px;
+		    border: 0px;
+		    background-color: unset;
+		    outline: inherit;
+		    font-size: 30px;
+		    width: 473px;
+		    height: 43px;
+		    left: 350px;
+		    top: 914px;
+		}
+		#winner-data-form-submit {
+			display: none;
+		}
+		#powered-by-ivm-get-prize-big {
+		    position: absolute;
+		    left: 800px;
+		    top: 1700px;
+		    z-index: 1;
+		}
+	</style>
+</head>
+<body>
+	<div class="get-prize-big-background">
+
+		<form id="winner-data-form" action="/send-winner-data" method="POST">
+
+			<input type="hidden" name="token" value="<%= token %>" />
+
+			<input id="input-1" type="text" name="name_chi">
+			<input id="input-2" type="text" name="name_eng">
+			<input id="input-3" type="text" name="hk_id">
+			<input id="input-4" type="text" name="phone_no">
+			<input id="input-5" type="email" name="email">
+		</form>
+
+		<a href="https://www.facebook.com/TapTabBox/" id="cancel-btn">
+			<div></div>
+		</a>
+		<!-- <a href="/send-winner-data/" id="send-data-btn">
+			<div></div>
+		</a> -->
+		<input id="winner-data-form-submit" type="submit" form="winner-data-form" />
+		<a id="send-data-btn" href="javascript:{}" onclick="document.getElementById('winner-data-form-submit').click();">
+			<div></div>
+		</a>
+
+		<div id="powered-by-ivm-get-prize-big">Powered by IVM</div>
+
+		<img style="width: 100%" src="/images/get_prize_1.jpg">
+	</div>
+</body>
+</html>

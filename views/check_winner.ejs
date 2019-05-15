@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Check winner</title>
+
+	<style type="text/css">
+		.small-prize-count {
+			display: inline;
+		}
+	</style>
+</head>
+<body>
+
+	<h1>細獎</h1>
+	<div>
+		<label>零食: </label> 
+		<div class="small-prize-count"><%= winner_2_count %></div>
+	</div>
+
+	<div>
+		<label>汽水: </label> 
+		<div class="small-prize-count"><%= winner_9_count %></div>
+	</div>
+	<div>
+		<label>精品: </label> 
+		<div class="small-prize-count"><%= winner_3_count %></div>
+	</div>
+
+
+	<h1>大獎</h1>
+	
+	<table style="width:100%" border="1">
+	  <tr>
+	    <th>中文名</th>
+	    <th>英文名</th> 
+	    <th>HK ID</th>
+	    <th>電話</th>
+	    <th>Email</th>
+	  </tr>
+
+	  	<% if ( winners_array.length > 0) { %>
+		  <% for (var i = 0; i < winners_array.length; i++) { %>
+		  	<tr>
+		  		<td><%= winners_array[i]['name_chi'] %></td>
+		  		<td><%= winners_array[i]['name_eng'] %></td>
+		  		<td><%= winners_array[i]['hk_id'] %></td>
+		  		<td><%= winners_array[i]['phone_no'] %></td>
+		  		<td><%= winners_array[i]['email'] %></td>
+		  	</tr>
+		  <% } %>
+		<% } else { %>
+			<tr>
+				<td colspan="5" style="text-align: center;">暫時未有</td>
+			</tr>
+		<% } %>
+	</table>
+</body>
+</html>
