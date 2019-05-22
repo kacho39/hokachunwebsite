@@ -91,11 +91,26 @@ app.get('/event_detail/:event_id', checkSignIn, function(req, res){
   .getEventDetail({
     event_id: req.params.event_id
   })
-  .then(({ event_detail, prize_token_array }) => {
+  .then(({ event_detail, scratchcard_array }) => {
     // console.log(event_detail)
     // if (success) res.sendStatus(200)
-    if (event_detail) res.render('event_detail', { event_detail: event_detail, username: req.session.username, prize_token_array})
+    if (event_detail) res.render('dashboard_event_detail', { event_detail: event_detail, username: req.session.username, scratchcard_array})
     else res.sendStatus(401)
+  })
+  // res.render('dashboard', {username: req.session.username});
+});
+app.get('/event_prize/:event_id', checkSignIn, function(req, res){
+  store
+  .getEventAllPrize({
+    event_id: req.params.event_id
+  })
+  .then(({ prize_id_array }) => {
+    // console.log(event_detail)
+    // if (success) res.sendStatus(200)
+
+    res.render('dashboard_event_prize', { username: req.session.username, prize_id_array });
+    // if (event_detail) res.render('dashboard_event_detail', { username: req.session.username })
+    // else res.sendStatus(401)
   })
   // res.render('dashboard', {username: req.session.username});
 });
@@ -170,8 +185,7 @@ app.post('/send-winner-data', (req, res) => {
 
   store
   .storeWinnerDataAndReturnWinnerInfo({
-    name_chi: req.body.name_chi,
-    name_eng: req.body.name_eng,
+    name_chi: req.body.name,
     hk_id: req.body.hk_id,
     phone_no: req.body.phone_no,
     email: req.body.email,

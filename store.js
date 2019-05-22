@@ -33,8 +33,8 @@ module.exports = {
 
         return { success: true, prize: prizes[0] }
       })
-  },storeWinnerDataAndReturnWinnerInfo({ name_chi, name_eng, hk_id, phone_no, email, token }) {
-    console.log(`Store and return winner info of ${name_eng}`)
+  },storeWinnerDataAndReturnWinnerInfo({ name, hk_id, phone_no, email, token }) {
+    console.log(`Store and return winner info of ${name}`)
     return knex('scratchcard').select('prize_token').where({
       prize_token: token
     }).from('scratchcard')
@@ -45,8 +45,7 @@ module.exports = {
           if (winner_info_have_prize_token.length == 0) {
 
             return knex('winner_info').insert([{
-              name_chi: name_chi, 
-              name_eng: name_eng, 
+              name: name, 
               hk_id: hk_id, 
               phone_no: phone_no, 
               email: email,
@@ -60,7 +59,7 @@ module.exports = {
               })
               .then(( updated ) => {
 
-                return knex.select('name_chi', 'name_eng', 'hk_id', 'phone_no', 'email', 'winner_info.id', 'prize_id').from('winner_info').innerJoin('prize_tokens', 'prize_tokens.prize_token', 'winner_info.prize_token').innerJoin('prizes', 'prizes.id', 'prize_tokens.prize_id')
+                return knex.select('name', 'hk_id', 'phone_no', 'email', 'winner_info.id', 'prize_id').from('winner_info').innerJoin('prize_tokens', 'prize_tokens.prize_token', 'winner_info.prize_token').innerJoin('prizes', 'prizes.id', 'prize_tokens.prize_id')
                 .then((winner_infos) => {
                   // if (winner_infos) re
                   return { winner_infos }
@@ -69,7 +68,7 @@ module.exports = {
             })
 
           } else {
-            return knex.select('name_chi', 'name_eng', 'hk_id', 'phone_no', 'email', 'winner_info.id', 'prize_id').from('winner_info').innerJoin('prize_tokens', 'prize_tokens.prize_token', 'winner_info.prize_token').innerJoin('prizes', 'prizes.id', 'prize_tokens.prize_id')
+            return knex.select('name', 'hk_id', 'phone_no', 'email', 'winner_info.id', 'prize_id').from('winner_info').innerJoin('prize_tokens', 'prize_tokens.prize_token', 'winner_info.prize_token').innerJoin('prizes', 'prizes.id', 'prize_tokens.prize_id')
             .then((winner_infos) => {
               // if (winner_infos) re
               return { winner_infos }
@@ -125,12 +124,21 @@ module.exports = {
       .then((event_detail_array) => {
         // if (!event_detail_array) return { success: false }
 
-        return knex('scratchcard').where('event_id', event_id)
-        .then((prize_token_array) => {
-          return { event_detail: event_detail_array[0], prize_token_array }
+        return knex('scratchcard').where('event_id', event_id).leftJoin('prize', 'scratchcard.prize_id', 'prize.id')
+        .then((scratchcard_array) => {
+          return { event_detail: event_detail_array[0], scratchcard_array }
         })
 
         // return { event_detail: event_detail_array[0] }
+      })
+  },
+  getEventAllPrize ({ event_id }) {
+    console.log(`Get all prize of event ${event_id}`)
+    return knex('scratchcard').select('prize_id').groupBy('prize_id').where('event_id', event_id)
+      .then((prize_id_array) => {
+        // if (!scratchcard) return { success: false }
+        // console.log(prize_id_array)
+        return { prize_id_array }
       })
   },
 }

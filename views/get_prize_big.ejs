@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>「智能刮刮卡」抽獎</title>
+	<title>刮刮卡</title>
+
+	<%- include('partials/head'); %>
 
 	<style type="text/css">
 		/*input:focus{
@@ -46,7 +48,7 @@
 			outline-offset: unset
 		}
 		.get-prize-big-background #input-1 {
-	        position: absolute;
+	        /*position: absolute;
 		    width: 260px;
 		    border: 0px;
 		    background-color: unset;
@@ -55,10 +57,10 @@
 		    width: 473px;
 		    height: 43px;
 		    left: 350px;
-		    top: 471px;
+		    top: 471px;*/
 		}
 		.get-prize-big-background #input-2 {
-	        position: absolute;
+	        /*position: absolute;
 		    width: 260px;
 		    border: 0px;
 		    background-color: unset;
@@ -67,10 +69,10 @@
 		    width: 473px;
 		    height: 43px;
 		    left: 350px;
-		    top: 555px;
+		    top: 555px;*/
 		}
 		.get-prize-big-background #input-3 {
-	        position: absolute;
+	        /*position: absolute;
 		    width: 260px;
 		    border: 0px;
 		    background-color: unset;
@@ -79,10 +81,10 @@
 		    width: 403px;
 		    height: 43px;
 		    left: 420px;
-		    top: 650px;
+		    top: 650px;*/
 		}
 		.get-prize-big-background #input-4 {
-	        position: absolute;
+	        /*position: absolute;
 		    width: 260px;
 		    border: 0px;
 		    background-color: unset;
@@ -91,10 +93,10 @@
 		    width: 406px;
 		    height: 43px;
 		    left: 418px;
-		    top: 817px;
+		    top: 817px;*/
 		}
 		.get-prize-big-background #input-5 {
-	        position: absolute;
+	        /*position: absolute;
 		    width: 260px;
 		    border: 0px;
 		    background-color: unset;
@@ -103,7 +105,7 @@
 		    width: 473px;
 		    height: 43px;
 		    left: 350px;
-		    top: 914px;
+		    top: 914px;*/
 		}
 		#winner-data-form-submit {
 			display: none;
@@ -117,8 +119,55 @@
 	</style>
 </head>
 <body>
-	<div class="get-prize-big-background">
+	
+	<div class="whole-page">
 
+		<div class="form-div">
+			<form id="winner-data-form" action="/send-winner-data" method="POST">
+
+				<input type="hidden" name="token" value="<%= token %>" />
+
+				<div class="input-div">
+					<label class="label-30">Name: </label>
+					<input id="input-1" class="form-input" type="text" name="name">
+				</div>
+				<div class="input-div">
+					<label class="label-30">HK ID: </label>
+					<input id="input-2" class="form-input" type="text" name="hk_id">
+				</div>
+				<div class="input-div">
+					<label class="label-30">Phone Number: </label>
+					<input id="input-3" class="form-input" type="text" name="phone_no">
+				</div>
+				<div class="input-div">
+					<label class="label-30">Email: </label>
+					<input id="input-4" class="form-input" type="email" name="email">
+				</div>
+
+				<input type="submit">
+			</form>
+		</div>
+
+		<!-- <div class="bg-div">
+		</div>
+
+		<div class="questionnaire-div">
+
+			<form id="questionnaire-form" action="/" method="POST">
+				
+			</form>
+
+		</div>
+
+		<div class="prev-page" onclick="goBack()"></div>
+
+		<div class="next-page" onclick="$('#form-submit-btn').click();"></div> -->
+
+	</div>
+
+	<!-- <div class="get-prize-big-background">
+
+		
 		<form id="winner-data-form" action="/send-winner-data" method="POST">
 
 			<input type="hidden" name="token" value="<%= token %>" />
@@ -133,17 +182,6 @@
 		<a href="https://www.facebook.com/TapTabBox/" id="cancel-btn">
 			<div></div>
 		</a>
-		<!-- <a href="/send-winner-data/" id="send-data-btn">
-			<div></div>
-		</a> -->
-		<input id="winner-data-form-submit" type="submit" form="winner-data-form" />
-		<a id="send-data-btn" href="javascript:{}" onclick="document.getElementById('winner-data-form-submit').click();">
-			<div></div>
-		</a>
-
-		<div id="powered-by-ivm-get-prize-big">Powered by IVM</div>
-
-		<img style="width: 100%" src="/images/get_prize_1.jpg">
-	</div>
+	</div> -->
 </body>
 </html>

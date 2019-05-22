@@ -93,6 +93,13 @@ https://github.com/andreruffert/scratchie.js
 -->
 
 <div id="scratch-background">
+
+	<div class="card-background">
+		<div class="scratch-card">
+			
+		</div>
+	</div>
+
 	<% if(prize_id) { %>
 		<% if(prize_id == 1){ %>
 			<img id="scratch-prize-img" src="/images/prize_1.png">
@@ -118,6 +125,7 @@ https://github.com/andreruffert/scratchie.js
 
 	<!-- <div id="powered-by-ivm-scratch-card">Powered by IVM</div> -->
 
+		<img id="scratch-background-img" src="/images/scratch_background_n.jpg">
 	<% if(qr_color == 'g'){ %>
 		<img id="scratch-background-img" src="/images/scratch_background_<%= qr_color %>.jpg">
 	<% } else if (qr_color == 's') { %>
@@ -127,8 +135,17 @@ https://github.com/andreruffert/scratchie.js
 	<% } %>
 </div>
 <!-- <h3 id="title">刮刮卡</h3> -->
+<div class="card-bg">
+	
+</div>
+
 <div class="box">
 	<div class="mask"><canvas id="j-cvs"></canvas></div>
+</div>
+
+<div>
+	<img src="/images/finger.png" style="position: absolute;">
+	<img src="/images/finger_top.png" style="position: relative;z-index: 2;pointer-events: none;">
 </div>
 
 <!-- <a href="/get-prize">

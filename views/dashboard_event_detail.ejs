@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard</title>
+
+	<%- include('partials/head'); %>
+
+	<style type="text/css">
+		.checkbox-size-20 {
+			width: 20px;
+			height: 20px;
+		}
+	</style>
+
+</head>
+<body>
+	<%- include('partials/nav'); %>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="dashboard-regular-label-div" style="margin-bottom: 20px;">
+					<label>Event name: </label>
+					<%= event_detail.event_name %>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<a href="/event_prize/<%= event_detail.id %>" class="btn btn-default" role="button" style="margin-bottom: 20px;">
+					Check prize for this event
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div>
+					<% if(scratchcard_array.length > 0){ %>
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">Prize</th>
+									<th scope="col">Scratched at</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% scratchcard_array.forEach(function(scratchcard) { %>
+									<tr>
+										<td> <%= scratchcard.id %> </td>
+										<td> <%= scratchcard.prize_name %></td>
+										<td> <%= scratchcard.scratched_at %> </td>
+									</tr>
+								<% }); %>
+							</tbody>
+						</table>
+			 		<% } else { %>
+						<h3 style="margin-top: 20px;text-align: center;">No event for this account</h3>
+			 		<% } %>
+
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<a href="/dashboard" class="btn btn-default" role="button">
+					Back
+				</a>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

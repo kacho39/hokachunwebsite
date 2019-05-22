@@ -25,3 +25,39 @@
 .closebtn:hover {
   color: black;
 }
+
+.form-div {
+  width: 80%;
+  margin: auto;
+  margin-top: 150px;
+  background-color: #ceedf0;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.label-30 {
+  width: 30%;
+}
+.form-input {
+  width: 63%;
+}
+#winner-data-form {
+  width: 50%;
+  margin: auto;
+}
+
+th, td {
+  text-align: center;
+}
+
+
+.dashboard-regular-label-div {
+  font-size: 20px;
+}
+.event-prize-div {
+  border: solid 1px;
+}
+.event-prize-img {
+  width: 100%;
+}
