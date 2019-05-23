@@ -61,3 +61,21 @@ th, td {
 .event-prize-img {
   width: 100%;
 }
+
+#card-bg {
+  position: absolute;
+  width: 888px;
+  height: 1200px;
+  left: 50px;
+  top: 200px;
+  /*z-index: 1;*/
+  background-color: #0985ef;
+  border-radius: 80px;
+}
+.card-title {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  font-size: 5rem;
+  margin-top: 40px;
+}

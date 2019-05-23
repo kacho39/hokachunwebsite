@@ -173,7 +173,7 @@ app.post('/get-prize', (req, res) => {
     //     res.render('get_prize_small', { redeem_qr: prize.redeem_qr });
     //     break;
     // }
-        res.render('get_prize_big', { token: req.body.token });
+        res.render('get_prize_small', { token: req.body.token });
     // if (machines) res.render('user_machines', { machines: machines, username: req.session.username})
       // else res.sendStatus(401)
     })
