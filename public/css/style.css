@@ -71,6 +71,14 @@ th, td {
   /*z-index: 1;*/
   background-color: #0985ef;
   border-radius: 80px;
+
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#7db9e8+0,207cca+28,2989d8+64,1e5799+90 */
+background: #7db9e8; /* Old browsers */
+background: -moz-linear-gradient(top,  #7db9e8 0%, #207cca 28%, #2989d8 64%, #1e5799 90%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #7db9e8 0%,#207cca 28%,#2989d8 64%,#1e5799 90%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #7db9e8 0%,#207cca 28%,#2989d8 64%,#1e5799 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8', endColorstr='#1e5799',GradientType=0 ); /* IE6-9 */
+
 }
 .card-title {
   width: 80%;
