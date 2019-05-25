@@ -4,30 +4,72 @@
 	<title>Dashboard</title>
 
 	<%- include('partials/head'); %>
+	<style type="text/css">
+		td {
+			vertical-align: middle !important;
+		}
+	</style>
 
 </head>
 <body>
 	<%- include('partials/nav'); %>
 	<div class="container">
 		<div class="row">
-			<% prize_id_array.forEach(function(prize) { %>
+
+			<!-- <% prize_id_array.forEach(function(prize) { %>
 				
 				<div class="col-sm-3">
-					<!-- <%= prize.prize_id %> -->
 					<div class="event-prize-div">
 						<img class="event-prize-img" src="/images/product/prize_<%= prize.prize_id %>.png">
 					</div>
 				</div>
-			<% }); %>
+			<% }); %> -->
+
+			<div class="col-sm-12">
+				<div>
+					<% if(prize_id_array.length > 0){ %>
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">Prize name</th>
+									<th scope="col">Image</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% prize_id_array.forEach(function(prize) { %>
+									<tr>
+										<td> <%= prize.prize_id %> </td>
+										<td> <%= prize.prize_name %></td>
+										<td> <img src="/images/product/prize_<%= prize.prize_id %>.png" style="width: 200px;"> </td>
+									</tr>
+								<% }); %>
+							</tbody>
+						</table>
+			 		<% } else { %>
+						<h3 style="margin-top: 20px;text-align: center;">No event for this account</h3>
+			 		<% } %>
+
+				</div>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
-				<a href="/dashboard" class="btn btn-default" role="button">
+				<!-- <a href="/dashboard" class="btn btn-default" role="button">
 					Back
-				</a>
+				</a> -->
+
+
+				<button onclick="goBack()" class="btn btn-default" role="button" style="margin-top: 20px;">Back</button>
 			</div>
 		</div>
 	</div>
 </body>
 
 </html>
+
+<script type="text/javascript">
+	function goBack() {
+	  window.history.back();
+	}
+</script>

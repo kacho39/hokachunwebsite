@@ -92,6 +92,7 @@ app.get('/event_detail/:event_id', checkSignIn, function(req, res){
     event_id: req.params.event_id
   })
   .then(({ event_detail, scratchcard_array }) => {
+    // console.log(scratchcard_array)
     // console.log(event_detail)
     // if (success) res.sendStatus(200)
     if (event_detail) res.render('dashboard_event_detail', { event_detail: event_detail, username: req.session.username, scratchcard_array})
@@ -107,7 +108,7 @@ app.get('/event_prize/:event_id', checkSignIn, function(req, res){
   .then(({ prize_id_array }) => {
     // console.log(event_detail)
     // if (success) res.sendStatus(200)
-
+    // console.log(prize_id_array)
     res.render('dashboard_event_prize', { username: req.session.username, prize_id_array });
     // if (event_detail) res.render('dashboard_event_detail', { username: req.session.username })
     // else res.sendStatus(401)
@@ -173,7 +174,7 @@ app.post('/get-prize', (req, res) => {
     //     res.render('get_prize_small', { redeem_qr: prize.redeem_qr });
     //     break;
     // }
-        res.render('get_prize_small', { token: req.body.token });
+        res.render('get_prize_small', { token: req.body.token, prize });
     // if (machines) res.render('user_machines', { machines: machines, username: req.session.username})
       // else res.sendStatus(401)
     })

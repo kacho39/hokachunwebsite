@@ -124,7 +124,7 @@ module.exports = {
       .then((event_detail_array) => {
         // if (!event_detail_array) return { success: false }
 
-        return knex('scratchcard').where('event_id', event_id).leftJoin('prize', 'scratchcard.prize_id', 'prize.id')
+        return knex('scratchcard').select('scratchcard.id', 'prize_name', 'scratched_at').where('event_id', event_id).leftJoin('prize', 'scratchcard.prize_id', 'prize.id')
         .then((scratchcard_array) => {
           return { event_detail: event_detail_array[0], scratchcard_array }
         })
@@ -134,7 +134,7 @@ module.exports = {
   },
   getEventAllPrize ({ event_id }) {
     console.log(`Get all prize of event ${event_id}`)
-    return knex('scratchcard').select('prize_id').groupBy('prize_id').where('event_id', event_id)
+    return knex('scratchcard').select('prize_id', 'prize_name').groupBy('prize_id').where('event_id', event_id).innerJoin('prize', 'scratchcard.prize_id', 'prize.id')
       .then((prize_id_array) => {
         // if (!scratchcard) return { success: false }
         // console.log(prize_id_array)

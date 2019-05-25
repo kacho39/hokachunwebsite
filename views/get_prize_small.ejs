@@ -36,10 +36,10 @@
 		#get-prize-small-background #qrcode img {
 		    /* width: 100%; */
 		    /* position: absolute; */
-		    width: 530px;
+		    /*width: 530px;*/
 		    /* height: 900px; */
-		    left: 225px;
-		    top: 837px;
+		    /*left: 225px;*/
+		    /*top: 837px;*/
 		    z-index: 1;
 		}
 		#powered-by-ivm-get-prize-small {
@@ -48,25 +48,55 @@
 		    top: 1700px;
 		    z-index: 1;
 		}
+		#get-prize-card {
+			padding: 30px;
+			margin: auto;
+			width: 80%;
+		}
+		#get-prize-card #get-prize-card-img-div {
+			/*position: unset;*/
+			margin: auto;
+			width: 50%;
+		}
+		#get-prize-card img {
+			position: unset;
+		}
+		#get-prize-card {
+	  		border-radius: 80px;
+			    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#7db9e8+0,207cca+28,2989d8+64,1e5799+90 */
+			background: #7db9e8; /* Old browsers */
+			background: -moz-linear-gradient(top,  #7db9e8 0%, #207cca 28%, #2989d8 64%, #1e5799 90%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top,  #7db9e8 0%,#207cca 28%,#2989d8 64%,#1e5799 90%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom,  #7db9e8 0%,#207cca 28%,#2989d8 64%,#1e5799 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8', endColorstr='#1e5799',GradientType=0 ); /* IE6-9 */
+		}
 	</style>
 </head>
 <body>
 	<div id="get-prize-small-background">
 
-		<a href="/images/snack.png" id="download-qr-btn" download="">
-			<!-- <div></div> -->
-		</a>
+		<!-- <a href="/images/snack.png" id="download-qr-btn" download=""></a> -->
+
+		<div id="get-prize-card">
+			<h1 style="text-align: center;">Congratulation the following is your prize</h1>
+			<div id="get-prize-card-img-div">
+				
+				<img src="/images/product/prize_<%= prize.prize_id %>.png">
+			</div>
+			<h1 style="text-align: center;">Scan the following QR code to redeem prize</h1>
+		<div id="qrcode" style="width: 50%;margin: auto;"></div>
+			
+		</div>
+
 		<!-- <img id="qr-img" src="/images/snack.png"> -->
-		<div id="qrcode"></div>
-		<div id="powered-by-ivm-get-prize-small">Powered by IVM</div>
-		<img style="width: 100%" src="/images/get_prize_2.jpg">
+		<!-- <div id="powered-by-ivm-get-prize-small">Powered by IVM</div> -->
+		<!-- <img style="width: 100%" src="/images/get_prize_2.jpg"> -->
 	</div>
 </body>
 
 <script type="text/javascript" src="/javascript/qrcode.min.js"></script>
 <script type="text/javascript">
-	var redeem_qr = <%- JSON.stringify(redeem_qr) %>;
-	// var redeem_qr = <%= redeem_qr %>;
+	var redeem_qr = <%- JSON.stringify(token) %>;
 	// console.log(redeem_qr)
 
 	// var redeem_qr = 'redeem_qr';
