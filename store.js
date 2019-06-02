@@ -111,8 +111,9 @@ module.exports = {
   },
   getAllEvent ({ owner_name }) {
     console.log(`Get all events of ${owner_name}`)
-    return knex('event').innerJoin('users', 'users.id', 'event.owner_id').where('username', owner_name)
+    return knex('event').select('event.id', 'event_name').innerJoin('users', 'users.id', 'event.owner_id').where('username', owner_name)
       .then((events) => {
+        console.log(events);
         if (!events) return { success: false }
 
         return { events }
