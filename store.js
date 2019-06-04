@@ -142,11 +142,22 @@ module.exports = {
         return { prize_id_array }
       })
   },
+  createToken ({ password, prize_id, event_id }) {
+    console.log(`Add token ${password}`)
+    const { salt, hash } = saltHashPassword({ password })
+    return knex('scratchcard').insert({
+      salt,
+      prize_token: hash,
+      prize_id,
+      event_id
+    }).debug()
+  },
 }
 function saltHashPassword ({
   password,
   salt = randomString()
 }) {
+  console.log(password)
   const hash = crypto
     .createHmac('sha512', salt)
     .update(password)

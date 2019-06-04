@@ -27,6 +27,19 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
+app.get('/token', function(req, res){
+ res.render('token');
+});
+app.post('/createToken', (req, res) => {
+  store
+  .createToken({
+    password: req.body.token_name,
+    prize_id: req.body.prize_id,
+    event_id: req.body.event_id
+  })
+  .then(() => res.sendStatus(200))
+})
+
 app.get('/', function(req, res){
  res.render('login', { error_message: req.query.error_message})
 });
